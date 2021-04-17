@@ -20,7 +20,7 @@ int main(void)
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
        ADC_DelSig_Start(); 
        Timer_Start();
-       isr_timer_StartEx(Custom_ISR_timer);
+       isr_1_StartEx(Custom_ISR_timer);
        ADC_DelSig_StartConvert();
     for(;;)
     {
