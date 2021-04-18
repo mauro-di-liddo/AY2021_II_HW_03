@@ -54,35 +54,35 @@ int main(void)
     for(;;)
     {
         if (read_flag==1){
-                AMux_Select(CHANNEL_PHOTO);
-                value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
-                if (value_digit < 0) value_digit=0;
-                if (value_digit > 65535) value_digit=65535;
-                sum_value_photo=sum_value_photo+value_digit;
+            AMux_Select(CHANNEL_PHOTO);
+            value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
+            if (value_digit < 0) value_digit=0;
+            if (value_digit > 65535) value_digit=65535;
+            sum_value_photo=sum_value_photo+value_digit;
                 
-                AMux_Select(CHANNEL_TEMP);
-                value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
-                if (value_digit < 0) value_digit=0;
-                if (value_digit > 65535) value_digit=65535;
-                sum_value_temp=sum_value_temp+value_digit;
-                read_flag=0;
-                count++;
-                if(count == 5){
-                    count=0;
-                    value_final_photo=sum_value_photo/5;
-                    value_final_temp=sum_value_temp/5;
-                    sum_value_photo=0;
-                    sum_value_temp=0;
-                    //sprintf(message, "photo: %ld\r\n", value_final_photo);
-                    //UART_1_PutString(message);
-                    //sprintf(message, "temp: %ld\r\n", value_final_temp);
-                    //UART_1_PutString(message);
-                }
-                slaveBuffer[3]=value_final_temp >> 8; //put in MSB
-                slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
+            AMux_Select(CHANNEL_TEMP);
+            value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
+            if (value_digit < 0) value_digit=0;
+            if (value_digit > 65535) value_digit=65535;
+            sum_value_temp=sum_value_temp+value_digit;
+            read_flag=0;
+            count++;
+            if(count == 5){
+                count=0;
+                value_final_photo=sum_value_photo/5;
+                value_final_temp=sum_value_temp/5;
+                sum_value_photo=0;
+                sum_value_temp=0;
+                //sprintf(message, "photo: %ld\r\n", value_final_photo);
+                //UART_1_PutString(message);
+                //sprintf(message, "temp: %ld\r\n", value_final_temp);
+                //UART_1_PutString(message);
+            }
+            slaveBuffer[3]=value_final_temp >> 8; //put in MSB
+            slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
                 
-                slaveBuffer[5]=value_final_photo >> 8; //put in MSB
-                slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
+            slaveBuffer[5]=value_final_photo >> 8; //put in MSB
+            slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
                 
         }
     }
