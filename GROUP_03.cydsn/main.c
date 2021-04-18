@@ -53,7 +53,6 @@ int main(void)
        
     for(;;)
     {
-        
         if (read_flag==1){
             AMux_Select(CHANNEL_PHOTO);
             value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
@@ -83,8 +82,7 @@ int main(void)
             slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
                 
             slaveBuffer[5]=value_final_photo >> 8; //put in MSB
-            slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
-                
+            slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB    
         }
     }
 }
