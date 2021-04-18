@@ -15,6 +15,7 @@
 
 CY_ISR(Custom_ISR_timer)  //timer overflow handler (useful for RX timeouts)
 {
-    Timer_ReadStatusRegister();  //clears interrupt flag 
+    Timer_ReadStatusRegister();//clears interrupt flag
+    read_flag=1;
 }
 /* [] END OF FILE */
