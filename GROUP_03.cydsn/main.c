@@ -53,6 +53,7 @@ int main(void)
        
     for(;;)
     {
+        
         if (read_flag==1){
             AMux_Select(CHANNEL_PHOTO);
             value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
