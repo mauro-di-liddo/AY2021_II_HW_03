@@ -6,11 +6,11 @@
     #define PSoC_ADD_REG1 0x00
     #define PSoC_ADD_REG2 0x01
 
-    #define OFF_MODE 0x14
-    #define PHT_MODE 0x15
-    #define TEMP_MODE 0x16
-    #define CONTEMP_MODE 0x17
-
+    #define OFF_MODE 0b111100
+    #define PHT_MODE 0b00111110
+    #define TEMP_MODE 0b00111101
+    #define CONTEMP_MODE 0b00111111
+    
 #endif
 
 /* [] END OF FILE */
