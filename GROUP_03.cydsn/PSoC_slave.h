@@ -9,7 +9,9 @@
     #define OFF_MODE 0b111100
     #define PHT_MODE 0b00111110
     #define TEMP_MODE 0b00111101
-    #define CONTEMP_MODE 0b00111111
+    #define CONTEMP_MODE 0b111111
+    
+    #define DEFAULT_SAMPLE 5
     
 #endif
 
