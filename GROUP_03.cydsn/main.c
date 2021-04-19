@@ -32,6 +32,10 @@ uint16_t count=0;
 #define CHANNEL_PHOTO 1
 #define ON 1
 #define OFF 0
+#define CONTEMP_MODE_STATE 0
+#define TEMP_MODE_STATE 1
+#define PHT_MODE_STATE 2
+#define OFF_MODE_STATE 3
 
 uint16_t number_sample = DEFAULT_SAMPLE;
 
@@ -66,23 +70,23 @@ int main(void)
     for(;;)
     {
         EZI2C_SetBuffer1(SLAVE_BUFFER_SIZE, SLAVE_BUFFER_SIZE-4, slaveBuffer);
-        uint8_t stato=slaveBuffer[0]>>2;
+        uint8_t stato=slaveBuffer[0]>>6;
         
         if(stato==CONTEMP_MODE){
-            stato = CONTEMP_MODE;
+            stato = CONTEMP_MODE_STATE;
         }
         else if(stato==TEMP_MODE){
-            stato=TEMP_MODE;
+            stato=TEMP_MODE_STATE;
         }
         else if(stato==PHT_MODE){
-            stato=PHT_MODE;
+            stato=PHT_MODE_STATE;
         }
         else if(stato==OFF_MODE){
-            stato=OFF_MODE;
+            stato=OFF_MODE_STATE;
         }
         
         switch(stato){
-            case CONTEMP_MODE:
+            case CONTEMP_MODE_STATE:
                 if (read_flag==1){
                     LEDPin_Write(OFF);
                     AMux_Select(CHANNEL_PHOTO);
@@ -115,10 +119,10 @@ int main(void)
                     slaveBuffer[5]=value_final_photo >> 8; //put in MSB
                     slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
                     LEDPin_Write(ON);
-                }
-                break;
-            case TEMP_MODE:
-                    if (read_flag==1){
+                    }
+            break;
+            case TEMP_MODE_STATE:
+                if (read_flag==1){
                         LEDPin_Write(OFF);
                         AMux_Select(CHANNEL_TEMP);
                         value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
@@ -139,32 +143,32 @@ int main(void)
                     slaveBuffer[3]=value_final_temp >> 8; //put in MSB
                     slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
                     }
-                break;
-            case PHT_MODE:
+            break;
+            case PHT_MODE_STATE:
                 //if(stato == PHT_MODE){
-                    if (read_flag==1){
-                        LEDPin_Write(OFF);
-                        AMux_Select(CHANNEL_PHOTO);
-                        value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
-                        if (value_digit < 0) value_digit=0;
-                        if (value_digit > 65535) value_digit=65535;
-                        sum_value_photo=sum_value_photo+value_digit;
-                        read_flag=0;
-                        count++;
-                        if(count==number_sample){
-                            count=0;
-                            value_final_photo=sum_value_photo/5;
-                            sum_value_photo=0;
-                            //sprintf(message, "photo: %ld\r\n", value_final_photo);
-                            //UART_1_PutString(message);
-                            //sprintf(message, "temp: %ld\r\n", value_final_temp);
-                            //UART_1_PutString(message);
-                        }
+                if (read_flag==1){
+                    LEDPin_Write(OFF);
+                    AMux_Select(CHANNEL_PHOTO);
+                    value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
+                    if (value_digit < 0) value_digit=0;
+                    if (value_digit > 65535) value_digit=65535;
+                    sum_value_photo=sum_value_photo+value_digit;
+                    read_flag=0;
+                    count++;
+                    if(count==number_sample){
+                        count=0;
+                        value_final_photo=sum_value_photo/5;
+                        sum_value_photo=0;
+                        //sprintf(message, "photo: %ld\r\n", value_final_photo);
+                        //UART_1_PutString(message);
+                        //sprintf(message, "temp: %ld\r\n", value_final_temp);
+                        //UART_1_PutString(message);
+                    }
                     slaveBuffer[5]=value_final_photo >> 8; //put in MSB
                     slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
-                    }
+                }
                 break;
-            case OFF_MODE:
+            case OFF_MODE_STATE:
                 LEDPin_Write(OFF);
                 break;
         }

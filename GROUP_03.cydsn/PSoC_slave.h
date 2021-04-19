@@ -6,10 +6,10 @@
     #define PSoC_ADD_REG1 0x00
     #define PSoC_ADD_REG2 0x01
 
-    #define OFF_MODE 0b111100
-    #define PHT_MODE 0b00111110
-    #define TEMP_MODE 0b00111101
-    #define CONTEMP_MODE 0b111111
+    #define OFF_MODE 0b00
+    #define PHT_MODE 0b0
+    #define TEMP_MODE 0b01
+    #define CONTEMP_MODE 0b11
     
     #define DEFAULT_SAMPLE 5
     
