@@ -20,8 +20,8 @@
 #define SLAVE_BUFFER_SIZE 7
 
 volatile uint8_t slaveBuffer[SLAVE_BUFFER_SIZE];
-uint8_t Control_Reg_1;
-uint8_t Control_Reg_2;
+#define Control_Reg_1 0
+#define Control_Reg_2 1
 int32 value_digit;
 int32 sum_value_photo;
 int32 sum_value_temp;
@@ -57,8 +57,8 @@ int main(void)
         EZI2C_Start();
         ADC_DelSig_StartConvert();
     
-        slaveBuffer[0] = Control_Reg_1;
-        slaveBuffer[1] = Control_Reg_2;
+        slaveBuffer[Control_Reg_1] = PSoC_ADD_REG1;
+        slaveBuffer[Control_Reg_2] = PSoC_ADD_REG2;
         // Set up who am i register
         slaveBuffer[SLAVE_BUFFER_SIZE-5] = 0xBC;
         avarage_flag=0;
