@@ -66,10 +66,10 @@ int main(void)
         value_final_photo=0;
         value_final_temp=0;
         
+        EZI2C_SetBuffer1(SLAVE_BUFFER_SIZE, SLAVE_BUFFER_SIZE-4, slaveBuffer);
        
     for(;;)
     {
-        EZI2C_SetBuffer1(SLAVE_BUFFER_SIZE, SLAVE_BUFFER_SIZE-4, slaveBuffer);
         uint8_t stato=slaveBuffer[0]>>6;
         
         if(stato==CONTEMP_MODE){
@@ -123,14 +123,14 @@ int main(void)
             break;
             case TEMP_MODE_STATE:
                 if (read_flag==1){
-                        LEDPin_Write(OFF);
-                        AMux_Select(CHANNEL_TEMP);
-                        value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
-                        if (value_digit < 0) value_digit=0;
-                        if (value_digit > 65535) value_digit=65535;
-                        sum_value_temp=sum_value_temp+value_digit;
-                        read_flag=0;
-                        count++;
+                    LEDPin_Write(OFF);
+                    AMux_Select(CHANNEL_TEMP);
+                    value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
+                    if (value_digit < 0) value_digit=0;
+                    if (value_digit > 65535) value_digit=65535;
+                    sum_value_temp=sum_value_temp+value_digit;
+                    read_flag=0;
+                    count++;
                     if(count==number_sample){
                         count=0;
                         value_final_temp=sum_value_temp/5;
