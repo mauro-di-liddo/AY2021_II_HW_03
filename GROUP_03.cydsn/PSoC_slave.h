@@ -7,7 +7,7 @@
     #define PSoC_ADD_REG2 0b00000000 //da capire cosa mettere di default
 
     #define OFF_MODE 0b00
-    #define PHT_MODE 0b0
+    #define PHT_MODE 0b10
     #define TEMP_MODE 0b01
     #define CONTEMP_MODE 0b11
     
