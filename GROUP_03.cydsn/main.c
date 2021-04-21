@@ -71,7 +71,7 @@ int main(void)
        
     for(;;)
     {
-        uint8_t stato=slaveBuffer[0]>>6;
+        uint8_t stato=slaveBuffer[0]&0b00000011;
         
         if(stato==CONTEMP_MODE){
             stato = CONTEMP_MODE_STATE;
