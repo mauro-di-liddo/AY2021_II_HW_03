@@ -57,8 +57,8 @@ int main(void)
         EZI2C_Start();
         ADC_DelSig_StartConvert();
     
-        slaveBuffer[Control_Reg_1] = PSoC_ADD_REG1;
-        slaveBuffer[Control_Reg_2] = PSoC_ADD_REG2;
+        slaveBuffer[Control_Reg_1] = PSoC_REG1;
+        slaveBuffer[Control_Reg_2] = PSoC_REG2;
         // Set up who am i register
         slaveBuffer[SLAVE_BUFFER_SIZE-5] = 0xBC;
         avarage_flag=0;
