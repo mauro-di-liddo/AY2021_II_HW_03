@@ -23,8 +23,10 @@
 
 volatile uint8_t slaveBuffer[SLAVE_BUFFER_SIZE];
 uint8_t dataBuffer[TRANSMIT_BUFFER_SIZE];
+
 #define Control_Reg_1 0
 #define Control_Reg_2 1
+
 int32 value_digit;
 int32 sum_value_photo;
 int32 sum_value_temp;
@@ -32,6 +34,7 @@ int32 value_final_photo;
 int32 value_final_temp;
 uint16_t count=0;
 uint16_t i=0;
+
 #define CHANNEL_TEMP 0
 #define CHANNEL_PHOTO 1
 #define ON 1
