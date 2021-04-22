@@ -19,8 +19,10 @@
 
 
 #define SLAVE_BUFFER_SIZE 7
+#define TRANSMIT_BUFFER_SIZE 6
 
 volatile uint8_t slaveBuffer[SLAVE_BUFFER_SIZE];
+uint8_t dataBuffer[TRANSMIT_BUFFER_SIZE];
 #define Control_Reg_1 0
 #define Control_Reg_2 1
 int32 value_digit;
@@ -64,6 +66,9 @@ int main(void)
         slaveBuffer[Control_Reg_2] = PSoC_REG2;
         // Set up who am i register
         slaveBuffer[SLAVE_BUFFER_SIZE-5] = 0xBC;
+        dataBuffer[0] = 0xA0; 
+        dataBuffer[TRANSMIT_BUFFER_SIZE-1] = 0xC0;
+ 
         avarage_flag=0;
         sum_value_photo=0;
         sum_value_temp=0;
@@ -119,17 +124,33 @@ int main(void)
                     sum_value_photo=0;
                     sum_value_temp=0;
                     count=0;
-                    //sprintf(message, "photo: %ld\r\n", value_final_photo);
-                    //UART_1_PutString(message);
-                    //sprintf(message, "temp: %ld\r\n", value_final_temp);
-                    //UART_1_PutString(message);
                 }
                 else break;
                 slaveBuffer[3]=value_final_temp >> 8; //put in MSB
                 slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
+                
+                dataBuffer[1] = 0;
+                dataBuffer[2] = 0;
+                dataBuffer[3] = value_final_temp >> 8;
+                dataBuffer[4] = value_final_temp & 0xFF;
+                        
+                UART_PutArray(dataBuffer, TRANSMIT_BUFFER_SIZE);
+                
+                sprintf(message, "Temp: %ld\r\n", value_final_temp);
+                UART_PutString(message);
                     
                 slaveBuffer[5]=value_final_photo >> 8; //put in MSB
                 slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
+                
+                dataBuffer[1] = value_final_photo >> 8;
+                dataBuffer[2] = value_final_photo & 0xFF;
+                dataBuffer[3] = 0x00;
+                dataBuffer[4] = 0x00;
+                        
+                UART_PutArray(dataBuffer, TRANSMIT_BUFFER_SIZE);
+                
+                sprintf(message, "Photo: %ld\r\n", value_final_photo);
+                UART_PutString(message);
             }
             break;
             case TEMP_MODE_STATE:
@@ -157,6 +178,16 @@ int main(void)
                 else break;
                 slaveBuffer[3]=value_final_temp >> 8; //put in MSB
                 slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
+
+                dataBuffer[1] = 0;
+                dataBuffer[2] = 0;
+                dataBuffer[3] = value_final_temp >> 8;
+                dataBuffer[4] = value_final_temp & 0xFF;
+                        
+                UART_PutArray(dataBuffer, TRANSMIT_BUFFER_SIZE);
+                
+                sprintf(message, "Temp: %ld\r\n", value_final_temp);
+                UART_PutString(message);
             }
             break;
             case PHT_MODE_STATE:
@@ -185,6 +216,16 @@ int main(void)
             }
             slaveBuffer[5]=value_final_photo >> 8; //put in MSB
             slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
+            dataBuffer[1] = value_final_photo >> 8;
+            dataBuffer[2] = value_final_photo & 0xFF;
+            dataBuffer[3] = 0x00;
+            dataBuffer[4] = 0x00;
+                    
+            UART_PutArray(dataBuffer, TRANSMIT_BUFFER_SIZE);
+            
+            sprintf(message, "Photo: %ld\r\n", value_final_photo);
+            UART_PutString(message);
+                    
             break;
             case OFF_MODE_STATE:
                 LEDPin_Write(OFF);
