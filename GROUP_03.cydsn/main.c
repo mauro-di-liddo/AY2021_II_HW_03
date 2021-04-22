@@ -110,6 +110,7 @@ int main(void)
                 sum_value_temp=sum_value_temp+value_digit;
                 count++;
             }
+            while(!avarage_flag);
             if (avarage_flag==1){
                 avarage_flag=0;
                 if(count==number_sample){  //double check
@@ -141,6 +142,7 @@ int main(void)
                 sum_value_temp=sum_value_temp+value_digit;
                 count++;
             }
+            while(!avarage_flag);
             if (avarage_flag==1){
                 avarage_flag=0;
                 if(count==number_sample){ //double check
@@ -167,6 +169,7 @@ int main(void)
                 sum_value_photo=sum_value_photo+value_digit;
                 count++;
             }
+            while(!avarage_flag);
             if (avarage_flag==1){
                 avarage_flag=0;
                 if(count==number_sample){  //double check
