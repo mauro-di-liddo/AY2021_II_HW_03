@@ -75,6 +75,7 @@ int main(void)
     for(;;)
     {
         number_sample=(slaveBuffer[Control_Reg_1] & 0b00111100)>>2;
+        if(number_sample==0) number_sample=1;
         /*secondo me il pc lo intende già come numero intero se lo utilizzi come numero intero, tipo nel for a riga 97
         se invece non lo intende già come numero intero dobbiamo trovare un modo di convertirlo*/
         uint8_t stato=(slaveBuffer[Control_Reg_1] & 0b00000011);
