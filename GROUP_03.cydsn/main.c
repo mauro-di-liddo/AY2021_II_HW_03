@@ -13,6 +13,7 @@
 #include "InterruptRoutines.h"
 #include "stdio.h"
 #include "PSoC_slave.h"
+#include "math.h"
 
 //inizializza "stato" come variabile globale
 
@@ -37,6 +38,8 @@ uint16_t i=0;
 #define TEMP_MODE_STATE 1
 #define PHT_MODE_STATE 2
 #define OFF_MODE_STATE 3
+
+long long n;
 
 uint16_t number_sample = DEFAULT_SAMPLE;
 
@@ -71,7 +74,10 @@ int main(void)
        
     for(;;)
     {
-        uint8_t stato=slaveBuffer[0]&0b00000011;
+        number_sample=(slaveBuffer[0] & 0b00111100)<<2;
+        /*secondo me il pc lo intende già come numero intero se lo utilizzi come numero intero, tipo nel for a riga 97
+        se invece non lo intende già come numero intero dobbiamo trovare un modo di convertirlo*/
+        uint8_t stato=(slaveBuffer[0] & 0b00000011);
         
         if(stato==CONTEMP_MODE){
             stato = CONTEMP_MODE_STATE;
@@ -85,8 +91,6 @@ int main(void)
         else if(stato==OFF_MODE){
             stato=OFF_MODE_STATE;
         }
-        
-        number_sample=slaveBuffer[0]& .... ; /*dobbiamo fare la maschera per isolare quei 4 bit*/
         
         switch(stato){
             case CONTEMP_MODE_STATE:
