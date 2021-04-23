@@ -109,12 +109,14 @@ int main(void)
                 value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
                 if (value_digit < 0) value_digit=0;
                 if (value_digit > 65535) value_digit=65535;
-                sum_value_photo=sum_value_photo+value_digit;
+                //sum_value_photo=sum_value_photo+value_digit;
                     
                 AMux_Select(CHANNEL_TEMP);
                 value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
                 if (value_digit < 0) value_digit=0;
                 if (value_digit > 65535) value_digit=65535;
+                
+                sum_value_photo=sum_value_photo+value_digit;
                 sum_value_temp=sum_value_temp+value_digit;
                 count++;
             }
