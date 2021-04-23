@@ -134,8 +134,7 @@ int main(void)
                 slaveBuffer[3]=value_final_temp >> 8; //put in MSB
                 slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
                 
-                dataBuffer[1] = 0;
-                dataBuffer[2] = 0;
+                
                 dataBuffer[3] = value_final_temp >> 8;
                 dataBuffer[4] = value_final_temp & 0xFF;
                         
@@ -149,8 +148,6 @@ int main(void)
                 
                 dataBuffer[1] = value_final_photo >> 8;
                 dataBuffer[2] = value_final_photo & 0xFF;
-                dataBuffer[3] = 0x00;
-                dataBuffer[4] = 0x00;
                         
                 UART_PutArray(dataBuffer, TRANSMIT_BUFFER_SIZE);
                 
