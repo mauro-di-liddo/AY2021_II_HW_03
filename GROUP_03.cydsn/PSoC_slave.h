@@ -12,6 +12,7 @@
     #define CONTEMP_MODE 0b00000011
     
     #define DEFAULT_SAMPLE 5
+    #define DEFAULT_PERIOD 20
     
 #endif
 
