@@ -3,8 +3,8 @@
 
     #define PSoC_DEVICE_ADDRESS 0x08
     #define PSoC_WHO_AM_I_REG_ADDR 0x02
-    #define PSoC_REG1 0b00111100 //da capire cosa mettere di default 
-    #define PSoC_REG2 0b00000000 //da capire cosa mettere di default
+    #define PSoC_REG1 0b00010111 //di default metto 5 sample(i 4 bit centrali codificano 5 in binario), e il campionamento di entrambi i sensori (i due bit finali entrambi a 1) 
+    #define PSoC_REG2 0b00010100 //di default metto 20 in binario per creare un isr di 4 ms
 
     #define OFF_MODE 0b00000000
     #define PHT_MODE 0b00000010
