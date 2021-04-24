@@ -1,3 +1,10 @@
+/* ========================================
+ * GROUP_03 - HW_03
+ * Di Liddo Mauro, Goshen Davide
+ * PSoC_slave.h
+ *
+ * ========================================
+*/
 #ifndef __PSoC_H
     #define __PSoC_H
 
