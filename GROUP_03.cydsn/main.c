@@ -15,10 +15,10 @@
 
 
 #define SLAVE_BUFFER_SIZE 7
-#define TRANSMIT_BUFFER_SIZE 6
+//#define TRANSMIT_BUFFER_SIZE 6
 
 volatile uint8_t slaveBuffer[SLAVE_BUFFER_SIZE];
-uint8_t dataBuffer[TRANSMIT_BUFFER_SIZE];
+//uint8_t dataBuffer[TRANSMIT_BUFFER_SIZE];
 
 #define Control_Reg_1 0
 #define Control_Reg_2 1
@@ -55,7 +55,7 @@ int main(void)
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
         ADC_DelSig_Start(); 
-        UART_Start();
+        //UART_Start();
         Timer_Start();
         AMux_Start();
         isr_ADC_StartEx(Custom_ISR_timer);
@@ -66,8 +66,8 @@ int main(void)
         slaveBuffer[Control_Reg_2] = PSoC_REG2;
         // Set up who am i register
         slaveBuffer[SLAVE_BUFFER_SIZE-5] = 0xBC;
-        dataBuffer[0] = 0xA0; 
-        dataBuffer[TRANSMIT_BUFFER_SIZE-1] = 0xC0;
+        //dataBuffer[0] = 0xA0; 
+        //dataBuffer[TRANSMIT_BUFFER_SIZE-1] = 0xC0;
  
         read_flag=0;
         sum_value_photo=0;
