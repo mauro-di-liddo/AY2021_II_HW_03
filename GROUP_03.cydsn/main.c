@@ -8,7 +8,6 @@
 #include "InterruptRoutines.h"
 #include "stdio.h"
 #include "PSoC_slave.h"
-#include "math.h"
 
 #define SLAVE_BUFFER_SIZE 7
 
@@ -148,6 +147,8 @@ int main(void)
                     sum_value_temp=0;
                     count=0;
                     
+                    slaveBuffer[5]=0x00;
+                    slaveBuffer[6]=0x00;
                     slaveBuffer[3]=value_final_temp >> 8; //put in MSB
                     slaveBuffer[4]=value_final_temp & 0xFF; //remain in LSB
                 }
@@ -169,6 +170,8 @@ int main(void)
                     sum_value_photo=0;
                     count=0;
                     
+                    slaveBuffer[3]=0x00;
+                    slaveBuffer[4]=0x00;
                     slaveBuffer[5]=value_final_photo >> 8; //put in MSB
                     slaveBuffer[6]=value_final_photo & 0xFF; //remain in LSB
                 }
@@ -176,6 +179,10 @@ int main(void)
             break;
             case OFF_MODE_STATE:
                 LEDPin_Write(OFF);
+                slaveBuffer[5]=0x00;
+                slaveBuffer[6]=0x00;
+                slaveBuffer[3]=0x00;
+                slaveBuffer[4]=0x00;
                 break;
         }
     }
