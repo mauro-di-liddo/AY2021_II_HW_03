@@ -10,7 +10,6 @@
 #include "PSoC_slave.h"
 #include "math.h"
 
-
 #define SLAVE_BUFFER_SIZE 7
 
 volatile uint8_t slaveBuffer[SLAVE_BUFFER_SIZE];
@@ -107,12 +106,12 @@ int main(void)
             if(read_flag==1){
                 read_flag=0;
                 AMux_Select(CHANNEL_PHOTO);
-                value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
+                value_digit=ADC_DelSig_Read32();
                 if (value_digit < 0) value_digit=0;
                 if (value_digit > 65535) value_digit=65535;
                 
                 AMux_Select(CHANNEL_TEMP);
-                value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
+                value_digit=ADC_DelSig_Read32();
                 if (value_digit < 0) value_digit=0;
                 if (value_digit > 65535) value_digit=65535;
                 
@@ -139,8 +138,7 @@ int main(void)
             if(read_flag==1){
                 read_flag=0;
                 AMux_Select(CHANNEL_TEMP);
-                value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
-                if (value_digit < 0) value_digit=0;
+                value_digit=ADC_DelSig_Read32();
                 if (value_digit > 65535) value_digit=65535;
                 
                 sum_value_temp=sum_value_temp+value_digit;
@@ -160,7 +158,7 @@ int main(void)
             if(read_flag){
                 read_flag=0;
                 AMux_Select(CHANNEL_PHOTO);
-                value_digit=ADC_DelSig_Read32(); //ricorda che per 16 bit single sample dobbiamo usare la funzione read32, ed è per questo che abbiamo inizializzato le variabili a 32 bit
+                value_digit=ADC_DelSig_Read32();
                 if (value_digit < 0) value_digit=0;
                 if (value_digit > 65535) value_digit=65535;
                 
