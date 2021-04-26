@@ -2,8 +2,8 @@
 
 BCP configuration:
 
-We set as default the value of 5 samples in CONTEMP_MODE to generate each value visualized in the chart, the user is free to change the desired value up
-to 15 samples modifying the bit devoted to that configuration (last .iic instruction, please do not modify the other lines but only the last one 'w 08 00 17 p'):
+We set as default the value of 5 samples in CONTEMP_MODE to generate each value visualized in the chart, the user is free to change the desired value from almost 2 up
+to almost 10 samples modifying the bit devoted to that configuration (last .iic instruction, please do not modify the other lines but only the last one 'w 08 00 17 p'):
 
 w 08 03 p
 r 08 @1ldr p
@@ -23,13 +23,13 @@ in particular the user should be interested in changing the last number (i.e. 17
 -bit 1:0 modality (00 shut down of the communication; 01 only temperature sensor on; 10 only light sensor on; 11 both sensors on)
 
 
-REMEMBER: if you want to change the number of samples, in order to guarantee a desired F trasmission rate, you have to change the  timer period value
+REMEMBER: if the user wants to change the number of samples, in order to guarantee a desired 'F' trasmission rate, the timer period value has to be changed
 according to this formula:
 
-5000/(F*new_sample_number) --- 5000Hz is our f_clock
+new_period_value = 5000/(F*new_sample_number); --- 5000Hz is our f_clock
 
-the new period value should be inserted in the register_2 by accessing via .iic in BCP:
+the new_period_value should be inserted in the register_2 by accessing via .iic in BCP:
 
 w 08 01 xx p
 
-whwere xx is the .hex value of the new period.
+whwere xx is the .hex value of the new period. It can vary from 10 Hz to 100 Hz.
