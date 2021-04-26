@@ -2,7 +2,6 @@
  * GROUP_03 - HW_03
  * Di Liddo Mauro, Goshen Davide
  * InterruptRoutines.h
- *
  * ========================================
 */
 #ifndef __INTERRUPT_ROUTINES_H__

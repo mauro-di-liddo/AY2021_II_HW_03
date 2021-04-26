@@ -11,7 +11,7 @@ in particular the user should be interested in changing the last number (i.e. 17
 -bit 7 - (not read by the program)
 -bit 6 - (not read by the program)
 -bit 5:2 number of samples (4 bits to codify the number of samples in binary, i.e. 0101 codifies 5 samples)
--bit 1:0 modality (00 shut down of the device; 01 only temperature sensor on; 10 only light sensor on; 11 both sensors on)
+-bit 1:0 modality (00 shut down of the communication; 01 only temperature sensor on; 10 only light sensor on; 11 both sensors on)
 
 
 REMEMBER: if you want to change the number of samples, in order to garauntee a fixed F trasmission rate, you have to change the  timer period value
