@@ -12,7 +12,7 @@ r 08 @1TMP p
 w 08 06 p 
 r 08 @0TMP p 
 
-w 08 00 15 p
+w 08 00 17 p
 
 ; in particular the user could be interested in changing the third number of the last line (i.e. 17 in hex) that codifies both the
 ; number of sample and the function modality. It is codified by 8 bits:
