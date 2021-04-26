@@ -14,6 +14,7 @@ r 08 @1tmp p
 w 08 06 p
 r 08 @0tmp p
 w 08 00 17 p
+w 08 01 14 p
 
 in particular the user should be interested in changing the last number (i.e. 17 in hex) that codifies both the number of sample and the function modality:
 -bit 7 - (not read by the program)
@@ -22,7 +23,7 @@ in particular the user should be interested in changing the last number (i.e. 17
 -bit 1:0 modality (00 shut down of the communication; 01 only temperature sensor on; 10 only light sensor on; 11 both sensors on)
 
 
-REMEMBER: if you want to change the number of samples, in order to garauntee a fixed F trasmission rate, you have to change the  timer period value
+REMEMBER: if you want to change the number of samples, in order to guarantee a desired F trasmission rate, you have to change the  timer period value
 according to this formula:
 
 5000/(F*new_sample_number) --- 5000Hz is our f_clock
