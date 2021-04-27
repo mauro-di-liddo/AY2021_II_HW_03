@@ -2,7 +2,7 @@
 ; The user is free to change the desired value from almost 2 up
 ; to almost 10 samples modifying the bit devoted to that configuration. The transmission rate can be modified too, and it can vary
 ; almost between 10 Hz and 100 Hz.
-; (please just the last two lines 'w 08 00 17 p' and 'w 08 01 14 p' are supposed to be modified in order to match your needs):
+; (please just the two lines 'w 08 00 17 p' and 'w 08 01 14 p' are supposed to be modified in order to match your needs):
 w 08 03 p 
 r 08 @1LDR p
 w 08 04 p 
@@ -14,8 +14,8 @@ r 08 @0TMP p
 
 w 08 00 17 p
 
-; in particular the user could be interested in changing the third number of the last line (i.e. 17 in hex) that codifies both the
-; number of sample and the function modality. It is codified by 8 bits:
+; in particular the user could be interested in changing the third number of this last line (i.e. 17 in hex) that codifies both the
+; number of sample and the function modality (which sensor we want to read). It is codified by 8 bits:
 ; -bit 7 - (not read by the program)
 ; -bit 6 - (not read by the program)
 ; -bits 5:2 number of samples (4 bits necessary to codify the number of samples in binary, i.e. 0101 codifies 5 samples)
@@ -23,7 +23,7 @@ w 08 00 17 p
 ; in this case 0x17 corresponds to 00010111 --> 00-0101(5 samples in decimal)-11(both sensors on)
 ; another example could be 0x16 that corresponds to 00010110 --> 00-0101(5 samples in decimal)-10(just the light sensor on)
 
-; REMEMBER: if the user wants to change the number of samples, in order to guarantee a desired 'F' trasmission rate,
+; REMEMBER: if the user wants to change the number of samples, in order to obtain a desired 'F' trasmission rate,
 ; the timer period value has to be changed as well according to this formula:
 
 ; new_period_value = 5000/(F*new_sample_number); --- 5000Hz is our f_clock
