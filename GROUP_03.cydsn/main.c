@@ -4,6 +4,7 @@
  * main.c
  * ========================================
 */
+
 #include "project.h"
 #include "InterruptRoutines.h"
 #include "stdio.h"
@@ -188,4 +189,5 @@ int main(void)
         }
     }
 }
+
 /* [] END OF FILE */
