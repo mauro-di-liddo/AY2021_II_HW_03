@@ -18,6 +18,7 @@ volatile uint8_t slaveBuffer[SLAVE_BUFFER_SIZE];
 
 //define for the avg computation
 int32 value_digit;
+int32 value_digit_1;
 int32 sum_value_photo;
 int32 sum_value_temp;
 int32 value_final_photo;
@@ -104,17 +105,17 @@ int main(void)
             LEDPin_Write(ON);
             if(read_flag==1){
                 read_flag=0;
-                AMux_Select(CHANNEL_PHOTO);
+                AMux_FastSelect(CHANNEL_PHOTO);
+                value_digit_1=ADC_DelSig_Read32();
+                if (value_digit_1 < 0) value_digit_1=0;
+                if (value_digit_1 > 65535) value_digit_1=65535;
+                
+                AMux_FastSelect(CHANNEL_TEMP);
                 value_digit=ADC_DelSig_Read32();
                 if (value_digit < 0) value_digit=0;
                 if (value_digit > 65535) value_digit=65535;
                 
-                AMux_Select(CHANNEL_TEMP);
-                value_digit=ADC_DelSig_Read32();
-                if (value_digit < 0) value_digit=0;
-                if (value_digit > 65535) value_digit=65535;
-                
-                sum_value_photo=sum_value_photo+value_digit;
+                sum_value_photo=sum_value_photo+value_digit_1;
                 sum_value_temp=sum_value_temp+value_digit;
                 count++;
                 if(count==number_sample){
@@ -136,7 +137,7 @@ int main(void)
             LEDPin_Write(OFF);
             if(read_flag==1){
                 read_flag=0;
-                AMux_Select(CHANNEL_TEMP);
+                AMux_FastSelect(CHANNEL_TEMP);
                 value_digit=ADC_DelSig_Read32();
                 if (value_digit > 65535) value_digit=65535;
                 
@@ -158,7 +159,7 @@ int main(void)
             LEDPin_Write(OFF);
             if(read_flag){
                 read_flag=0;
-                AMux_Select(CHANNEL_PHOTO);
+                AMux_FastSelect(CHANNEL_PHOTO);
                 value_digit=ADC_DelSig_Read32();
                 if (value_digit < 0) value_digit=0;
                 if (value_digit > 65535) value_digit=65535;
