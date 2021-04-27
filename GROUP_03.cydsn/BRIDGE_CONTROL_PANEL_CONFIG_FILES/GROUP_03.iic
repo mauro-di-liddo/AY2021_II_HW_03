@@ -30,7 +30,7 @@ w 08 00 17 p
 
 ;the new_period_value should be inserted in the register_2 by running the following line:
 ;w 08 01 xx p
-;where xx is the .hex value of the new period. It can vary from 10 Hz to 100 Hz.
+;where xx is the .hex value of the new period. 'F' can vary from 10 Hz to 100 Hz.
 
 w 08 01 14 p
 ;as mentioned above we set the default value of the period to 0x14 (20 in decimal) in order to match our needs of having a 
